@@ -19,3 +19,4 @@ add_executable(week_2_assignment_1 week_2/assignment_1/compare_students.cpp week
 add_executable(week_2_assignment_2 week_2/assignment_2/learner.cpp)
 add_executable(week_2_assignment_3 week_2/assignment_3/expresses.cpp)
 add_executable(week_2_assignment_4 week_2/assignment_4/ebook.cpp)
+add_executable(week_2_assignment_5 week_2/assignment_5/booking.cpp)
