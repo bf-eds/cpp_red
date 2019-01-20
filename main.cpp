@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <array>
 
 using namespace std;
 
@@ -37,8 +38,8 @@ int main()
 {
 //    Base b;
 //    Derived d;
-    Base *b = new Derived();
-    delete b;
+    array<char, 5> a = {"abcd"};
+    string_view(&a[0], a.size());
 
     return 0;
 }
