@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 project(cpp_red)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -pedantic -Wfatal-errors -O0")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -W -Wall -Wextra -pedantic -Wfatal-errors -O0")
 
 message("CMAKE_CXX_FLAGS_DEBUG:  ${CMAKE_CXX_FLAGS_DEBUG}")
 
@@ -25,3 +25,4 @@ add_executable(week_3_assignment_2 week_3/assignment_2/swap_sort_copy.cpp)
 add_executable(week_3_assignment_3 week_3/assignment_3/simple_vector.cpp)
 add_executable(week_3_assignment_4 week_3/assignment_4/linked_list.cpp)
 add_executable(week_4_assignment_1 week_4/assignment_1/athlets.cpp)
+add_executable(week_4_assignment_2 week_4/assignment_2/stack_vector.cpp)
