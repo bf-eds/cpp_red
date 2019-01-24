@@ -19,34 +19,70 @@ class AirportCounter
 {
 public:
     // конструктор по умолчанию: список элементов пока пуст
-    AirportCounter();
+    AirportCounter()
+    {
+//        for (size_t i = 0; i < static_cast<uint32_t>(TAirport::Last_); ++i)
+//        {
+//            airports_[i].first = static_cast<TAirport>(i);
+//        }
+//        airports_.fill(0);
+    }
 
     // конструктор от диапазона элементов типа TAirport
     template<typename TIterator>
-    AirportCounter(TIterator begin, TIterator end);
+    AirportCounter(TIterator begin, TIterator end) : AirportCounter()
+    {
+        for (; begin != end; begin++)
+        {
+            airports_[static_cast<size_t>(*begin++)]++;
+            Insert(*begin);
+        }
+    }
 
     // получить количество элементов, равных данному
-    size_t Get(TAirport airport) const;
+    size_t Get(TAirport airport) const
+    {
+        return airports_[static_cast<uint32_t >(airport)];
+    }
 
     // добавить данный элемент
-    void Insert(TAirport airport);
+    void Insert(TAirport airport)
+    {
+        airports_[static_cast<size_t>(airport)]++;
+    }
 
     // удалить одно вхождение данного элемента
-    void EraseOne(TAirport airport);
+    void EraseOne(TAirport airport)
+    {
+        airports_[static_cast<size_t>(airport)]--;
+    }
 
     // удалить все вхождения данного элемента
-    void EraseAll(TAirport airport);
+    void EraseAll(TAirport airport)
+    {
+        airports_[static_cast<size_t>(airport)] = 0;
+    }
 
+    static const size_t AIRPORT_SIZE = static_cast<uint32_t>(TAirport::Last_);
     using Item = pair<TAirport, size_t>;
-    using Items = /* ??? */;
+    using Items = array<Item, AIRPORT_SIZE>;
 
     // получить некоторый объект, по которому можно проитерироваться,
     // получив набор объектов типа Item - пар (аэропорт, количество),
     // упорядоченных по аэропорту
-    Items GetItems() const;
+    Items GetItems() const
+    {
+        Items items;
+        for (int i = 0; i < AIRPORT_SIZE; ++i)
+        {
+            items[i] = {static_cast<TAirport>(i), airports_[i]};
+        }
+
+        return items;
+    }
 
 private:
-    // ???
+    array<size_t, AIRPORT_SIZE> airports_ = {0};
 };
 
 void TestMoscow()
