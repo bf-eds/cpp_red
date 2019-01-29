@@ -6,6 +6,7 @@
 #include <list>
 #include <algorithm>
 #include "test_runner.h"
+
 using namespace std;
 
 class Editor
