@@ -33,3 +33,4 @@ add_executable(week_4_assignment_6 week_4/assignment_6/server_stats.cpp week_4/a
 add_executable(week_5_assignment_1 week_5/assignment_1/permutations.cpp)
 add_executable(week_5_assignment_2 week_5/assignment_2/group_heavy_strings.cpp)
 add_executable(week_5_assignment_3 week_5/assignment_3/simple_vector.cpp)
+add_executable(week_5_assignment_4 week_5/assignment_4/split_into_sentences.cpp)
