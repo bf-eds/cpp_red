@@ -19,7 +19,37 @@ template<typename Token> using Sentence = vector<Token>;
 template<typename Token>
 vector<Sentence<Token>> SplitIntoSentences(vector<Token> tokens)
 {
-    // Напишите реализацию функции, не копируя объекты типа Token
+    vector<Sentence<Token>> sentencesVector;
+    Sentence<Token> sentence;
+
+    auto it = begin(tokens);
+
+    while (it != end(tokens))
+    {
+        if ((*it).IsEndSentencePunctuation())
+        {
+            do
+            {
+                sentence.push_back(move(*it));
+                ++it;
+            }
+            while ((it != end(tokens)) && ((*it).IsEndSentencePunctuation()));
+
+            sentencesVector.push_back(move(sentence));
+        }
+        else
+        {
+            sentence.push_back(move(*it));
+            ++it;
+        }
+    }
+
+    if (!sentence.empty())
+    {
+        sentencesVector.push_back(move(sentence));
+    }
+
+    return sentencesVector;
 }
 
 
@@ -43,7 +73,6 @@ ostream &operator<<(ostream &stream, const TestToken &token)
 {
     return stream << token.data;
 }
-
 
 struct NoncopyableToken
 {
