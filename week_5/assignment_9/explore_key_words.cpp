@@ -87,9 +87,9 @@ struct Stats
 
     void operator+=(const Stats &other)
     {
-        for (const auto &word : other.word_frequences)
+        for (const auto &[word, frequency] : other.word_frequences)
         {
-            word_frequences[word.first]++;
+            word_frequences[word] += frequency;
         }
     }
 };
@@ -125,22 +125,20 @@ Stats ExploreKeyWords(const set<string> &key_words, istream &input)
 {
     vector<future<Stats>> futures;
     Stats stats;
-    string line;
+    const int num_threads = 4;
+    vector<stringstream> streams(4);
 
-    while (getline(input, line))
+    int i = 0;
+    stringstream ss;
+
+    for (string line; getline(input, line); i++)
     {
-        stringstream ss;
-        ss << line;
-//        for (int i = 1; i < 1000 && getline(input, line); ++i)
-//        {
-//            ss << line << " ";
-//        }
+        streams[i % num_threads] << line << '\n';
+    }
 
-        cout << "ss: " << ss.str() << endl;
-
-//        ss << "asdf asdfa sdf asdf as df";
-
-        futures.push_back(async(ExploreKeyWordsSingleThread, ref(key_words), ref(ss)));
+    for (auto &s : streams)
+    {
+        futures.push_back(async(ExploreKeyWordsSingleThread, ref(key_words), ref(s)));
     }
 
     for (auto &f : futures)
